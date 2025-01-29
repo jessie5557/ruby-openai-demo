@@ -20,6 +20,26 @@ raw_response = client.chat(
   }
 )
 
-pp raw_response
+next_message = raw_response.fetch("choices").at(0).fetch("message")
 
-next_respons = p
+message_list.push(next_message)
+
+message_list.push(
+  {:role => "user",:content => "What about NYC?"}
+)
+
+pp next_message
+
+
+raw_response = client.chat(
+  parameters: {
+    model: "gpt-3.5-turbo",
+    messages: message_list
+  }
+)
+
+next_message = raw_response.fetch("choices").at(0).fetch("message")
+
+message_list.push(next_message)
+
+pp next_message
