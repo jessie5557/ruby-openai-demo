@@ -13,9 +13,7 @@ message_list = [
   {:role => "user",:content => user_request}
   ]  
 
-if user_request == "bye"
-  pp "bye"
-else
+  while user_request != "bye"
   # Call the API to get the next message from GPT
   raw_response = client.chat(
     parameters: {
@@ -31,4 +29,4 @@ else
   pp "Hello! How can I help you today?"
   pp "-" * 50
   user_request = gets
-end
+  end
