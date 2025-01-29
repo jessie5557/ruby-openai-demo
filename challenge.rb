@@ -13,22 +13,22 @@ message_list = [
   {:role => "user",:content => user_request}
   ]  
 
-while user_request = "bye"
-pp "bye"
+if user_request == "bye"
+  pp "bye"
 else
-# Call the API to get the next message from GPT
-raw_response = client.chat(
-  parameters: {
-    model: "gpt-3.5-turbo",
-    messages: message_list
-  }
-)
+  # Call the API to get the next message from GPT
+  raw_response = client.chat(
+    parameters: {
+      model: "gpt-3.5-turbo",
+      messages: message_list
+    }
+  )
+  
+  next_message = raw_response.fetch("choices").at(0).fetch("message").fetch("content")
+  message_list.push(next_message)
+  pp next_message
 
-next_message = raw_response.fetch("choices").at(0).fetch("message")
-message_list.push(next_message)
-pp next_message
-
-pp "Hello! How can I help you today?"
-pp "-" * 50
-user_request = gets
+  pp "Hello! How can I help you today?"
+  pp "-" * 50
+  user_request = gets
 end
